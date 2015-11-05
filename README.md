@@ -6,8 +6,11 @@ for any other OAuth provider.
 
 * Installation:
 	* Make a Python 3 based virtualenv:
+
 		> mkvirtualenv -p /path/to/python3 tweet_lister
+
 	* Install Python dependencies:
+
 		> pip install -r requirements/demo.txt
 
 * Create a twitter app, and then
@@ -21,6 +24,7 @@ for any other OAuth provider.
 	> python app.py
 
 NOT included:
+
 	* a basic nginx conf to serve on port 80
 	* supervisor conf for gunicorn, etc
 	* pagination of tweets - you'll only see the most recent 10
