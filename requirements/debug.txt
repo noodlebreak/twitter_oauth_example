@@ -1,0 +1,5 @@
+# Base dependencies
+-r base.txt
+
+ipython==4.0.0
+ipython-genutils==0.1.0

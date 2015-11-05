@@ -1,0 +1,5 @@
+# Base dependencies
+
+-r base.txt
+
+# Other production specific dependencies go here..

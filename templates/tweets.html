@@ -1,0 +1,54 @@
+<html>
+	
+	<head>
+		<title>
+			Your Tweets
+		</title>
+		<link rel="stylesheet" href="static/style.css">
+	</head>
+		
+	<body>
+	<div class='content'>
+
+		<a href="/">
+			<div class='button'>
+				Back to home
+			</div>
+		</a>
+
+		{% if tweets %}
+			<h3>Here are your tweets:</h3>
+			<br>
+			<br>
+			{% for tweet in tweets %}
+				<div class='tweet'>
+					<ul>
+						{{tweet.0}}  <!-- tweet text -->
+						<p>
+							{{tweet.1}} <!-- tweet created_at -->
+						</p>
+					</ul>
+				</div>
+			{% endfor %}
+		
+		{% else %}
+			Authentication failed or something went wrong.
+			<br>
+			Can't fetch your tweets
+			<br>
+			Reason from Twitter:
+			{{ failure_message }}
+			<!-- Request token and oauth token not same. -->
+		
+		{% endif %}
+		<a href="/">
+			<div class='button'>
+				Back to home
+			</div>
+		</a>
+
+	</div>
+	
+	</body>
+
+</html>

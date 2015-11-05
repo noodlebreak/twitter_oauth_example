@@ -1,0 +1,51 @@
+<html>
+	
+	<head>
+		<title>
+			{{provider}} lister
+		</title>
+	
+		<link rel="stylesheet" href="static/style.css">	
+	</head>
+	<body>
+	
+	{% if not logged_in %}
+		<h3>Login to {{provider}}</h3>
+	{% else %}
+	You are authenticated, awesome!
+	{% endif %}
+
+	<br>
+	<br>
+	<br>
+	{% if success is defined %}
+		{% if not success %}			
+
+			Could not fetch a request token, please try again later
+		
+		{% else %}
+
+			
+				{% if logged_in %}
+					<a href="/view_data">
+						<div class='button'>
+							{{ logged_in_message }}
+						</div>
+					</a>								
+				{% else %}
+					<a href="{{login_url}}">
+						<div class='button'>
+							Login to {{provider}}
+						</div>
+					</a>
+				{% endif %}
+			
+			
+		{% endif %}
+
+	{% endif %}	
+	
+	
+	</body>
+
+</html>
