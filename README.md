@@ -5,9 +5,10 @@ Currently not very generic, so can't really be used
 for any other OAuth provider.
 
 * Installation:
-	* Make a Python 3 based virtualenv
-	* mkvirtualenv -p /path/to/python3 tweet_lister
-	* pip install -r requirements/demo.txt
+	* Make a Python 3 based virtualenv:
+		> mkvirtualenv -p /path/to/python3 tweet_lister
+	* Install Python dependencies:
+		> pip install -r requirements/demo.txt
 
 * Create a twitter app, and then
   export your app's consumer key and consumer secret
