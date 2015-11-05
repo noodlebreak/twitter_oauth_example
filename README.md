@@ -23,6 +23,8 @@ for any other OAuth provider.
 * Run the app:
 	> python app.py
 
+You can now start using the app by going to [http://localhost:5000](http://localhost:5000)
+
 NOT included:
 
 	* a basic nginx conf to serve on port 80
