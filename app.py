@@ -41,6 +41,7 @@ def home():
                 cfg.PROVIDER_BASE_URL, cfg.OAUTH_LOGIN_EP,
                 '?oauth_token=%s' % cfg.REQUEST_OAUTH_TOKEN)
             p('cfg.AUTHORIZE_REDIRECT_URL = %s' % cfg.AUTHORIZE_REDIRECT_URL)
+    p("cfg.REQUEST_TOKEN_ACQUIRED SET")
     return render_template('home.html',
                            login_url=cfg.AUTHORIZE_REDIRECT_URL,
                            provider=cfg.PROVIDER,
