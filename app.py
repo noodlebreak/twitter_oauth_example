@@ -23,27 +23,28 @@ def home():
 
     if not cfg.HOST_URL:
         cfg.HOST_URL = request.base_url
-        p('Host url set: %s' % cfg.HOST_URL)
+        p('home(): Host url set: %s' % cfg.HOST_URL)
 
     # Do not call Twitter again if already acquired
     if not cfg.REQUEST_TOKEN_ACQUIRED:
-        p('cfg.REQUEST_TOKEN_ACQUIRED NOT SET\n')
+        p('home(): cfg.REQUEST_TOKEN_ACQUIRED NOT SET\n')
         # Step 1 - Get request token
         reqtoken = utils.get_request_token()
         if reqtoken:
             cfg.REQUEST_TOKEN_ACQUIRED = True
-            p('cfg.REQUEST_TOKEN_ACQUIRED SET = {}'.format(
-                cfg.REQUEST_TOKEN_ACQUIRED))
+            p('home(): cfg.REQUEST_TOKEN_ACQUIRED NOW SET')
 
             cfg.REQUEST_OAUTH_SECRET = reqtoken[0]
             cfg.REQUEST_OAUTH_TOKEN = reqtoken[1]
+            p("home(): cfg.REQUEST_OAUTH_TOKEN = %s" % cfg.REQUEST_OAUTH_TOKEN)
+
             cfg.AUTHORIZE_REDIRECT_URL = utils.make_url(
                 cfg.PROVIDER_BASE_URL, cfg.OAUTH_LOGIN_EP,
                 '?oauth_token=%s' % cfg.REQUEST_OAUTH_TOKEN)
 
-            p('cfg.AUTHORIZE_REDIRECT_URL = %s' % cfg.AUTHORIZE_REDIRECT_URL)
-
-    p("cfg.REQUEST_TOKEN_ACQUIRED SET")
+            p('home(): cfg.AUTHORIZE_REDIRECT_URL = %s' % cfg.AUTHORIZE_REDIRECT_URL)
+    else:
+        p("home(): cfg.REQUEST_TOKEN_ACQUIRED SET")
     return render_template('home.html',
                            login_url=cfg.AUTHORIZE_REDIRECT_URL,
                            provider=cfg.PROVIDER,
@@ -63,7 +64,7 @@ def callback():
     cfg.OAUTH_TOKEN = request.args['oauth_token']
     cfg.OAUTH_VERIFIER = request.args['oauth_verifier']
 
-    p("cfg.OAUTH_TOKEN:{} and cfg.OAUTH_VERIFIER:{}".format(
+    p("callback(): cfg.OAUTH_TOKEN:{} and cfg.OAUTH_VERIFIER:{}".format(
         cfg.OAUTH_TOKEN, cfg.OAUTH_VERIFIER))
     # Step 2 - User should click the login url,
     # and then we'll get the oauth_token and verifier
@@ -71,23 +72,25 @@ def callback():
 
     # RT from step 1 must be equal to OT from step 2 (Twitter)
     if cfg.OAUTH_TOKEN == cfg.REQUEST_OAUTH_TOKEN:
-        p("cfg.OAUTH_TOKEN == cfg.REQUEST_OAUTH_TOKEN")
+        p("callback(): cfg.OAUTH_TOKEN == cfg.REQUEST_OAUTH_TOKEN")
         # Step 3 - exchange request token for access token
         utils.get_oauth_access_token()
 
         if cfg.ACCESS_TOKEN and cfg.ACCESS_TOKEN_SECRET:
-            p("SUCCESS Acquired accesstoken:{} and accesstokensecret:{}".format(
+            p("callback(): SUCCESS Acquired accesstoken:{} and accesstokensecret:{}".format(
                 cfg.ACCESS_TOKEN, cfg.ACCESS_TOKEN_SECRET))
             # Finally, we have access tokens
             # to do API calls on behalf of the authenticated user
             cfg.IS_AUTHENTICATED = True
-            p("\n*****AUTHENTICATED********\n")
+            p("callback():*****AUTHENTICATED********\n")
         else:
-            p("FAILURE access token and secret not acquired")
-            p("Acquired accesstoken:{} and accesstokensecret:{}".format(
+            p("callback(): FAILURE access token and secret not acquired")
+            p("callback(): Acquired accesstoken:{} and accesstokensecret:{}".format(
                 cfg.ACCESS_TOKEN, cfg.ACCESS_TOKEN_SECRET))
     else:
-        p("cfg.OAUTH_TOKEN != cfg.REQUEST_OAUTH_TOKEN")
+        p("callback(): cfg.OAUTH_TOKEN != cfg.REQUEST_OAUTH_TOKEN")
+        p("callback(): cfg.OAUTH_TOKEN: %s" % cfg.OAUTH_TOKEN)
+        p("callback(): cfg.REQUEST_OAUTH_TOKEN: %s" % cfg.REQUEST_OAUTH_TOKEN)
 
     cfg.AUTHENTICATION_TRIED = True
     return redirect('/')
@@ -102,7 +105,7 @@ def view_data():
     tweets = 'Not authenticated'
     failure_message = None
 
-    p("cfg.IS_AUTHENTICATED:{}, cfg.AUTHENTICATION_TRIED:{}".format(
+    p("view_data(): cfg.IS_AUTHENTICATED:{}, cfg.AUTHENTICATION_TRIED:{}".format(
         cfg.IS_AUTHENTICATED, cfg.AUTHENTICATION_TRIED))
 
     if cfg.IS_AUTHENTICATED:
