@@ -72,11 +72,17 @@ def callback():
         utils.get_oauth_access_token()
 
         if cfg.ACCESS_TOKEN and cfg.ACCESS_TOKEN_SECRET:
-            print("Acquired accesstoken:{} and accesstokensecret:{}".format(
+            p("SUCCESS Acquired accesstoken:{} and accesstokensecret:{}".format(
                 cfg.ACCESS_TOKEN, cfg.ACCESS_TOKEN_SECRET))
             # Finally, we have access tokens
             # to do API calls on behalf of the authenticated user
             cfg.IS_AUTHENTICATED = True
+        else:
+            p("FAILURE access token and secret not acquired")
+            p("Acquired accesstoken:{} and accesstokensecret:{}".format(
+                cfg.ACCESS_TOKEN, cfg.ACCESS_TOKEN_SECRET))
+    else:
+        p("cfg.OAUTH_TOKEN != cfg.REQUEST_OAUTH_TOKEN")
 
     cfg.AUTHENTICATION_TRIED = True
     return render_template('home.html',
