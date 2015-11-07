@@ -9,7 +9,7 @@ import random
 import time
 import requests
 
-from app import cfg
+import config as cfg
 
 # Join together a bunch of strings
 # to create a proper API endpoint for a request
