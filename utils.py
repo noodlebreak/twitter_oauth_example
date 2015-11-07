@@ -106,6 +106,8 @@ def get_request_token():
         if parsed['oauth_callback_confirmed']:
             print("***** Request token acquired successfully *****\n")
             return (parsed['oauth_token_secret'][0], parsed['oauth_token'][0])
+    else:
+        print("get_request_token failed: {} {}".format(resp.text, resp.status_code))
 
 
 def get_oauth_access_token():
