@@ -31,3 +31,7 @@ NOT included:
 	* supervisor conf for gunicorn, etc
 	* pagination of tweets - you'll only see the most recent 10
 
+NOTE: There's a bug in there, and its because the JSON file used for saving the creds.
+Don't waste time trying to figure out why the tweets sometimes come and why sometimes
+authentication is required.
+
