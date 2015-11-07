@@ -40,7 +40,9 @@ def home():
             cfg.AUTHORIZE_REDIRECT_URL = utils.make_url(
                 cfg.PROVIDER_BASE_URL, cfg.OAUTH_LOGIN_EP,
                 '?oauth_token=%s' % cfg.REQUEST_OAUTH_TOKEN)
+
             p('cfg.AUTHORIZE_REDIRECT_URL = %s' % cfg.AUTHORIZE_REDIRECT_URL)
+
     p("cfg.REQUEST_TOKEN_ACQUIRED SET")
     return render_template('home.html',
                            login_url=cfg.AUTHORIZE_REDIRECT_URL,
@@ -79,6 +81,7 @@ def callback():
             # Finally, we have access tokens
             # to do API calls on behalf of the authenticated user
             cfg.IS_AUTHENTICATED = True
+            p("\n*****AUTHENTICATED********\n")
         else:
             p("FAILURE access token and secret not acquired")
             p("Acquired accesstoken:{} and accesstokensecret:{}".format(
