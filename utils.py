@@ -191,7 +191,7 @@ def get_users_tweets(full=False):
                           headers={'Authorization': auth_header_string},
                           params=params)
     if not tweets.ok:
-        return tweets.text
+        return "--".join([tweets.text, str(tweets.status_code)])
 
     if not full:
         tweets = [extract_tweet(tweet) for tweet in tweets.json()]

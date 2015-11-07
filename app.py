@@ -78,7 +78,7 @@ def view_data():
     View which shows an authenticated user their
     data. Tweets, in case of Twitter.
     """
-    tweets = None
+    tweets = 'Not authenticated'
     failure_message = None
 
     if cfg.IS_AUTHENTICATED:
