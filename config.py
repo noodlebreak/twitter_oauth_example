@@ -3,7 +3,7 @@ import os
 
 # This is bad... But I don't have the time
 # to find the alternative
-HOST_URL = 'http://localhost:5000'
+HOST_URL = ''
 
 API_KEY = os.getenv('API_KEY', '')
 API_SECRET = os.getenv('API_SECRET', '')

@@ -69,11 +69,6 @@ def calc_hmac_signature(method, url, param_string_data, key):
     signature_base_string = '&'.join(
         [method, quote_plus(url), quote_plus(param_string)])
 
-    print("\nurl: %s" % url)
-    print("\nsignature_base_string: %s\n" % signature_base_string)
-    print('key: %s \n' % key)
-    print("######################")
-
     hashed = hmac.new(key.encode(), signature_base_string.encode(), sha1)
     hmac_res = base64.encodebytes(hashed.digest()).decode().strip('\n')
     return hmac_res.rstrip('\n')

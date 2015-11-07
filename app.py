@@ -18,6 +18,9 @@ def home():
     will be available.
     """
 
+    if not cfg.HOST_URL:
+        cfg.HOST_URL = request.base_url
+
     # Do not call Twitter again if already acquired
     if not cfg.REQUEST_TOKEN_ACQUIRED:
         # Step 1 - Get request token
