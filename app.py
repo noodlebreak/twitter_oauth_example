@@ -2,6 +2,7 @@ import utils
 
 from flask import Flask, request
 from flask import render_template
+from flask import redirect
 
 import config as cfg
 
@@ -85,10 +86,7 @@ def callback():
         p("cfg.OAUTH_TOKEN != cfg.REQUEST_OAUTH_TOKEN")
 
     cfg.AUTHENTICATION_TRIED = True
-    return render_template('home.html',
-                           success=cfg.REQUEST_TOKEN_ACQUIRED,
-                           logged_in=cfg.IS_AUTHENTICATED,
-                           logged_in_message=cfg.LOGGED_IN_MESSAGE)
+    return redirect('/')
 
 
 @app.route('/view_data')
